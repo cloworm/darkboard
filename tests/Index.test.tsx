@@ -2,10 +2,13 @@ import React, { FunctionComponent } from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 
 import Index from '../pages/index'
+import { BoardProvider } from '../shared/state/board'
 
 const TestComponent: FunctionComponent = () => {
   return (
-    <Index />
+    <BoardProvider>
+      <Index />
+    </BoardProvider>
   )
 }
 

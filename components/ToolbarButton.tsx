@@ -1,13 +1,13 @@
 import React, { FunctionComponent, ReactElement } from 'react'
 import { IconButton } from '@chakra-ui/react'
 
-import Selected from '../shared/types/Selected'
+import { ToolType } from '../shared/state/board'
 
 interface Props {
-  label: Selected
+  label: ToolType
   icon: ReactElement
-  selected: Selected
-  onClick: (option: Selected) => void
+  selected: ToolType
+  onClick: (option: ToolType) => void
 }
 
 const ToolbarButton: FunctionComponent<Props> = ({
