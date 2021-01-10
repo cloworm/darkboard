@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import { AppProps } from 'next/app'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import '../styles/globals.css'
@@ -9,13 +9,13 @@ const theme = extendTheme({
       50: '#dffef7',
       100: '#b7f7e7',
       200: '#8ef1d8',
-      300: '#8ef1d8',
-      400: '#8ef1d8',
-      500: '#8ef1d8',
-      600: '#63ebc8',
-      700: '#3de4b9',
-      800: '#28cba0',
-      900: '#1a9f7b'
+      300: '#63ebc8',
+      400: '#3de5ba',
+      500: '#27cba0',
+      600: '#1a9f7c',
+      700: '#0e7158',
+      800: '#014435',
+      900: '#001911'
     }
   },
   fonts: {

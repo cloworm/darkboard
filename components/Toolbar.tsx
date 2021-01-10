@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useState } from 'react'
+import React, { FunctionComponent, useCallback, useState } from 'react'
 import { Box, Icon } from '@chakra-ui/react'
 import { IoText, IoBrush } from 'react-icons/io5'
 
@@ -9,10 +9,10 @@ const Draw = <Icon as={IoBrush} />
 const TextIcon = <Icon as={IoText} />
 
 const Toolbar: FunctionComponent = () => {
-  const [selected, setSelected] = useState<Selected>(Selected.DRAW)
+  const [selected] = useState<Selected>(Selected.DRAW)
 
   const handleClick = useCallback((option) => {
-    setSelected(option)
+    console.log('option', option)
   }, [])
 
   return (
