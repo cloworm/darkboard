@@ -29,7 +29,7 @@ const theme = extendTheme({
 const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
   return (
     <BoardProvider>
-      <ChakraProvider theme ={theme}>
+      <ChakraProvider theme={theme}>
         <Component {...pageProps} />
       </ChakraProvider>
     </BoardProvider>

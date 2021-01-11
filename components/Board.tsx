@@ -7,8 +7,8 @@ import Toolbar from './Toolbar'
 import useBoard from '../shared/hooks/useBoard'
 import { ToolType } from '../shared/state/board'
 
-const canvasStyle = {position: 'absolute', top: '0', left: '0', width: '100%'} as CSSProperties
-const cursorStyle = {position: 'absolute', top: 0, left: 0, pointerEvents: 'none'} as CSSProperties
+const canvasStyle = { position: 'absolute', top: '0', left: '0', width: '100%' } as CSSProperties
+const cursorStyle = { position: 'absolute', top: 0, left: 0, pointerEvents: 'none' } as CSSProperties
 
 const Board: FunctionComponent = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>()

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react'
+import React, { FunctionComponent, ReactElement, useCallback } from 'react'
 import { IconButton } from '@chakra-ui/react'
 
 import { ToolType } from '../shared/state/board'
@@ -22,7 +22,7 @@ const ToolbarButton: FunctionComponent<Props> = ({
       aria-label={label}
       icon={icon}
       borderRadius={0}
-      onClick={() => onClick(label)}
+      onClick={useCallback(() => onClick(label), [onClick, label])}
       variant="outline"
       borderWidth={0}
       isActive={label === selected}
