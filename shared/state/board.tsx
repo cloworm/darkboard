@@ -2,8 +2,17 @@ import React, { Dispatch, createContext, useReducer, FunctionComponent, useMemo 
 
 
 export enum ToolType {
-  DRAW = 'draw',
-  TEXT = 'text'
+  Circle = 'circle',
+  Line = 'line',
+  Arrow = 'arrow',
+  Pencil = 'pencil',
+  Rectangle = 'rectangle',
+  RectangleLabel = 'rectangle-label',
+  Select = 'select',
+  Pan = 'pan',
+  Highlighter = 'highlighter',
+  DefaultTool = 'default-tool',
+  Text = 'text'
 }
 
 interface State {
@@ -11,7 +20,7 @@ interface State {
 }
 
 const initialState: State = {
-  selectedTool: ToolType.DRAW
+  selectedTool: ToolType.Pencil
 }
 
 export enum BoardAction {
