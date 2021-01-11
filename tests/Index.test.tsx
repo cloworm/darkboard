@@ -13,16 +13,16 @@ const TestComponent: FunctionComponent = () => {
 }
 
 describe('Index', () => {
-  test('The toolbar has the draw tool selected on page load', () => {
+  test('The toolbar has the pencil tool selected on page load', () => {
     render(<TestComponent />)
     const button = screen.getByRole('button', { pressed: true })
-    expect(button).toHaveAttribute('aria-label', 'draw')
+    expect(button).toHaveAttribute('aria-label', 'pencil')
   })
 
   test('Clicking a toggle button changes the selected option', () => {
     render(<TestComponent />)
     const button = screen.getByRole('button', { pressed: true })
-    expect(button).toHaveAttribute('aria-label', 'draw')
+    expect(button).toHaveAttribute('aria-label', 'pencil')
 
     fireEvent.click(screen.getByRole('button', { name: 'text' } ))
     const button2 = screen.getByRole('button', { pressed: true })
