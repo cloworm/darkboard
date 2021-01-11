@@ -23,8 +23,8 @@ const Toolbar: FunctionComponent = () => {
   return (
     <Box bg="rgba(255, 255, 255, 0.6)" borderRadius={10} overflow="hidden">
       <ToolbarButton label={ToolType.Pencil} icon={DrawIcon} selected={selectedTool} onClick={handleClick}  />
-      <ToolbarButton label={ToolType.Select} icon={SelectIcon} selected={selectedTool} onClick={handleClick}  />
       <ToolbarButton label={ToolType.Text} icon={TextIcon} selected={selectedTool} onClick={handleClick}  />
+      <ToolbarButton label={ToolType.Select} icon={SelectIcon} selected={selectedTool} onClick={handleClick}  />
     </Box>
   )
 }

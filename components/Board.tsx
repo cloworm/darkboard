@@ -42,8 +42,10 @@ const Board: FunctionComponent = () => {
   const [canvas, setCanvas] = useState<any>('')
   const { selectedTool } = useBoard()
   const isMounted = useIsMounted()
+  const mousecursorRef = useRef<any>()
+  const cursorRef = useRef<any>()
 
-  const initCanvas = () => {
+  const initCanvas = useCallback(() => {
     const canvas = new fabric.Canvas('canvas', {
       height: 800,
       width: 800,
@@ -51,11 +53,16 @@ const Board: FunctionComponent = () => {
       isDrawingMode: true,
       freeDrawingCursor: 'none'
     })
+    cursorRef.current = new fabric.StaticCanvas('cursor', {
+      height: 800,
+      width: 800
+    })
+    const cursor = cursorRef.current
 
     canvas.freeDrawingBrush.width = 10
     canvas.freeDrawingBrush.color = '#9f9'
 
-    const mousecursor = new fabric.Circle({
+    mousecursorRef.current = new fabric.Circle({
       left: 0,
       top: 0,
       radius: canvas.freeDrawingBrush.width / 2,
@@ -64,39 +71,82 @@ const Board: FunctionComponent = () => {
       originY: 'bottom',
     })
 
-    canvas.add(mousecursor)
+    const mousecursor = mousecursorRef.current
 
-    // Cursor in canvas
-    canvas.on('mouse:move', event => {
-      mousecursor.top = event.e.layerY + mousecursor.radius
-      mousecursor.left = event.e.layerX + mousecursor.radius
-      canvas.renderAll()
+    cursor.add(mousecursor)
+
+    canvas.on('mouse:move', function (event) {
+      // const mouse = this.getPointer(evt.e)
+      mousecursor.set({
+        top: event.e.layerY + mousecursor.radius,
+        left: event.e.layerX + mousecursor.radius
+      })
+        .setCoords().canvas?.renderAll()
     })
 
-    // Cursor out of canvas
-    canvas.on('mouse:out', () => {
-      mousecursor.top = -100
-      mousecursor.left = -100
-      canvas.renderAll()
+    canvas.on('mouse:out', function () {
+      // put circle off screen
+      mousecursor.set({
+        top: -100,
+        left: -100
+      })
+        .setCoords().canvas?.renderAll()
     })
+
+
+    // // Cursor in canvas
+    // canvas.on('mouse:move', event => {
+    //   mousecursor.top = event.e.layerY + mousecursor.radius
+    //   mousecursor.left = event.e.layerX + mousecursor.radius
+    //   canvas.renderAll()
+    // })
+
+    // // Cursor out of canvas
+    // canvas.on('mouse:out', () => {
+    //   mousecursor.top = -100
+    //   mousecursor.left = -100
+    //   canvas.renderAll()
+    // })
 
     return canvas
-  }
+  }, [])
 
   useEffect(() => {
     if (isMounted) {
       setCanvas(initCanvas())
     }
-  }, [isMounted])
+  }, [initCanvas, isMounted])
 
   useEffect(() => {
-    if (!canvas) return
+    if (!canvas || !mousecursorRef?.current) return
 
     if (selectedTool === ToolType.Pencil) {
       canvas.isDrawingMode = true
+      canvas.renderAll()
+      cursorRef.current.add(mousecursorRef.current)
+      // mousecursorRef.current.set({
+      //   color: '#9f9'
+      // })
     } else {
       canvas.isDrawingMode = false
+      console.log('canvas before', canvas)
+      cursorRef.current.remove(mousecursorRef.current)
+      // mousecursorRef.current.set({
+      //   color: '#121212'
+      // })
+      console.log('canvas after', canvas)
     }
+
+    if (selectedTool === ToolType.Text) {
+      const text = new fabric.IText('Your Text Here', {
+        left: 100,
+        top: 100,
+        fontFamily: 'Noto Sans JP',
+        fill: '#F9ABCE'
+      })
+      canvas.add(text)
+    }
+
   }, [canvas, selectedTool])
 
   // useEffect(() => {
@@ -119,7 +169,8 @@ const Board: FunctionComponent = () => {
 
   return (
     <Box position="relative">
-      <canvas id="canvas" width="800" height="800" />
+      <canvas id="canvas" width="300" style={{position: 'absolute', top: '0', left: '0', width: '100%'}} height="300" />
+      <canvas id="cursor" style={{position: 'absolute', top: 0, left: 0, pointerEvents: 'none'}} width="300" height="300" />
       <Box position="absolute" top="5" left="10">
         <Toolbar />
       </Box>
