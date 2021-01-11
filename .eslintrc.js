@@ -43,7 +43,10 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': [0],
     'react-hooks/exhaustive-deps': 2,
-    '@typescript-eslint/no-unused-vars': [2, { varsIgnorePattern: '_.*' }]
+    '@typescript-eslint/no-unused-vars': [2, { varsIgnorePattern: '_.*' }],
+    'object-curly-spacing': ['error', 'always'],
+    'react/jsx-curly-spacing': [2, { 'when': 'never', 'allowMultiline': true }],
+    'react/jsx-equals-spacing': [2, 'never']
   },
   'settings': {
     'react': {
